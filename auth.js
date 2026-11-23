@@ -20,6 +20,13 @@
     message.classList.toggle("error", isError);
   }
 
+  function getDataSyncErrorMessage(error) {
+    if (error?.code === "PGRST205") {
+      return `Bảng ${DATA_TABLE} chưa được tạo. Hãy chạy supabase/schema.sql trong Supabase SQL Editor.`;
+    }
+    return error?.message || "Lỗi kết nối Supabase.";
+  }
+
   function showProtectedPageError(error) {
     const container = document.querySelector(".content") || document.body;
     const alert = document.createElement("section");
@@ -119,14 +126,7 @@
       const { error } = await supabaseClient
         .from(DATA_TABLE)
         .upsert(rows, { onConflict: "user_id,data_key" });
-      function getDataSyncErrorMessage(error) {
-    if (error?.code === "PGRST205") {
-      return `Bảng ${DATA_TABLE} chưa được tạo. Hãy chạy supabase/schema.sql trong Supabase SQL Editor.`;
-    }
-    return error?.message || "Lỗi kết nối Supabase.";
-  }
-
-  function showProtectedPageError(error) {
+      if (error) throw new Error(getDataSyncErrorMessage(error));
     });
     pendingDataWrite = write;
     await write;
