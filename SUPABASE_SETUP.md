@@ -5,8 +5,9 @@ GitHub Pages chi host giao dien tinh. Supabase cung cap dang nhap va luu du lieu
 ## Trang thai hien tai
 
 - `supabase-config.js` da co Project URL va publishable key cong khai.
+- Ma nguon da duoc tai len repository: https://github.com/dtc235200269-commits/chayngaydi.
+- GitHub Pages da duoc bat tu nhanh `main`, thu muc goc: https://dtc235200269-commits.github.io/chayngaydi/.
 - Bang du lieu chua co trong Supabase; can chay `supabase/schema.sql`.
-- Workspace nay chua co GitHub repository/Pages URL, nen chua co link cong khai.
 
 ## 1. Tao project Supabase
 
