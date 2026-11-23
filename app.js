@@ -11,6 +11,9 @@ const searchInput = document.querySelector(".search input");
 const toast = document.getElementById("toast");
 const overviewPage = document.getElementById("overviewPage");
 const subPage = document.getElementById("subPage");
+const isAdmin = () => window.aquaAuth?.isAdmin?.() === true;
+function enforceAdminAction(action) { if (isAdmin()) return true; showToast("Tài khoản chỉ có quyền xem. Chỉ Admin mới được chỉnh dữ liệu.", true); return false; }
+function applyViewerMode() { if (isAdmin()) return; document.querySelectorAll("#addPondButton, .pond-action, .delete-market-item, .save-market-price, #pondModal").forEach((element) => element.style.display = "none"); document.querySelectorAll("#pondForm, #marketItemForm, #inspectionForm, #journalEntryForm, #reportForm").forEach((form) => form.querySelectorAll("input, textarea, select, button").forEach((control) => control.disabled = true)); if (!document.querySelector(".viewer-mode-banner")) { const banner = document.createElement("div"); banner.className = "viewer-mode-banner utility-card"; banner.textContent = "Chế độ xem: tài khoản này không thể thêm, sửa hoặc xóa dữ liệu."; (document.querySelector(".content") || document.body).prepend(banner); } }
 
 function storageKey(key) {
   const account = window.aquaAuth?.getCurrentUser();
@@ -26,15 +29,19 @@ function reportSyncError(error) {
 }
 
 function writeAppData(key, value) {
+  if (!enforceAdminAction("edit data")) return false;
   localStorage.setItem(storageKey(key), JSON.stringify(value));
   window.aquaAuth.saveAppData(key, value).catch(reportSyncError);
+  return true;
 }
 
 function writeAppDataBatch(entries) {
+  if (!enforceAdminAction("edit data")) return false;
   entries.forEach(([key, value]) => {
     localStorage.setItem(storageKey(key), JSON.stringify(value));
   });
   window.aquaAuth.saveAppDataBatch(entries).catch(reportSyncError);
+  return true;
 }
 
 const defaultPonds = [
@@ -126,6 +133,7 @@ function loadMarketItems() {
 }
 
 function saveMarketItems() {
+  if (!enforceAdminAction("edit market")) return false;
   try {
     writeAppData("aquasmart-market-items", marketItems);
     return true;
@@ -154,10 +162,12 @@ function loadPondPowerStates() {
 }
 
 function savePonds() {
+  if (!enforceAdminAction("edit ponds")) return false;
   writeAppData("aquasmart-ponds", ponds);
 }
 
 function savePondPowerStates() {
+  if (!enforceAdminAction("edit equipment")) return false;
   try {
     writeAppData("aquasmart-pond-power-states", pondPowerStates);
     return true;
@@ -306,6 +316,7 @@ function renderPonds(query = "", target = pondRows) {
 }
 
 function openModal(id = null) {
+  if (!enforceAdminAction("edit ponds")) return;
   if (!modal || !pondForm) return;
   editingId = id;
   pondForm.reset();
@@ -341,6 +352,7 @@ function closeModal() {
 }
 
 function deletePond(id) {
+  if (!enforceAdminAction("edit ponds")) return;
   const pond = ponds.find((item) => item.id === id);
   if (!pond) return;
   if (!window.confirm(`Xóa "${pond.name}" khỏi danh sách?`)) return;
@@ -1120,6 +1132,7 @@ document.addEventListener("keydown", (event) => {
 
 pondForm?.addEventListener("submit", (event) => {
   event.preventDefault();
+  if (!enforceAdminAction("edit ponds")) return;
   const form = new FormData(pondForm);
   const name = String(form.get("name")).trim();
   const area = Number(form.get("area"));
@@ -1284,4 +1297,5 @@ if (currentPage && currentPage !== "overview") {
   drawChart();
   window.addEventListener("resize", drawChart);
 }
+applyViewerMode();
 })();
