@@ -119,7 +119,14 @@
       const { error } = await supabaseClient
         .from(DATA_TABLE)
         .upsert(rows, { onConflict: "user_id,data_key" });
-      if (error) throw new Error(error.message);
+      function getDataSyncErrorMessage(error) {
+    if (error?.code === "PGRST205") {
+      return `Bảng ${DATA_TABLE} chưa được tạo. Hãy chạy supabase/schema.sql trong Supabase SQL Editor.`;
+    }
+    return error?.message || "Lỗi kết nối Supabase.";
+  }
+
+  function showProtectedPageError(error) {
     });
     pendingDataWrite = write;
     await write;
@@ -134,7 +141,7 @@
     const { data, error } = await supabaseClient
       .from(DATA_TABLE)
       .select("data_key,data_value");
-    if (error) throw new Error(`Không tải được dữ liệu từ Supabase: ${error.message}`);
+    if (error) throw new Error(`Không tải được dữ liệu từ Supabase: ${getDataSyncErrorMessage(error)}`);
 
     try {
       for (const row of data || []) {
@@ -163,7 +170,7 @@
     const updates = { data: { name: normalizedName } };
     if (emailConfirmationRequired) updates.email = normalizedEmail;
     const { data, error } = await supabaseClient.auth.updateUser(updates);
-    if (error) throw new Error(error.message);
+        if (error) throw new Error(error.message);
     currentUser = mapUser(data.user);
     syncProfiles(currentUser);
     return { user: currentUser, emailConfirmationRequired };
@@ -222,7 +229,7 @@
       if (!await window.aquaAuthReady || !supabaseClient) return;
       setRememberPreference();
       const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-      if (error) throw new Error("Email hoặc mật khẩu không chính xác.");
+      if (error) throw new Error(error.code === "invalid_credentials" ? "Email hoặc mật khẩu không chính xác." : `Không thể đăng nhập: ${error.message}`);
       window.location.replace(new URL("index.html?v=20261123-3", window.location.href).href);
     } catch (error) {
       showMessage(error.message || "Không thể đăng nhập.");
