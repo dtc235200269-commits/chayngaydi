@@ -33,19 +33,31 @@ create policy "Users can insert their own AquaSmart data"
   on public.aquasmart_user_data
   for insert
   to authenticated
-  with check ((select auth.uid()) = user_id);
+  with check (
+    (select auth.uid()) = user_id
+    and coalesce((auth.jwt() -> 'app_metadata' ->> 'role'), '') = 'admin'
+  );
 
 drop policy if exists "Users can update their own AquaSmart data" on public.aquasmart_user_data;
 create policy "Users can update their own AquaSmart data"
   on public.aquasmart_user_data
   for update
   to authenticated
-  using ((select auth.uid()) = user_id)
-  with check ((select auth.uid()) = user_id);
+  using (
+    (select auth.uid()) = user_id
+    and coalesce((auth.jwt() -> 'app_metadata' ->> 'role'), '') = 'admin'
+  )
+  with check (
+    (select auth.uid()) = user_id
+    and coalesce((auth.jwt() -> 'app_metadata' ->> 'role'), '') = 'admin'
+  );
 
 drop policy if exists "Users can delete their own AquaSmart data" on public.aquasmart_user_data;
 create policy "Users can delete their own AquaSmart data"
   on public.aquasmart_user_data
   for delete
   to authenticated
-  using ((select auth.uid()) = user_id);
+  using (
+    (select auth.uid()) = user_id
+    and coalesce((auth.jwt() -> 'app_metadata' ->> 'role'), '') = 'admin'
+  );
