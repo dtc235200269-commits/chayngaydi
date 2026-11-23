@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaSmart - Quản lý nuôi trồng thủy sản</title>
+  <meta name="description" content="Nền tảng quản lý thông minh cho ao nuôi thủy sản">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261123-2">
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40"><path d="M20 4C12 10 8 17 8 24c0 7 5 12 12 12s12-5 12-12C32 17 28 10 20 4Z"/><path d="M13 25c4-2 10-2 14 1M20 12v17" fill="none" stroke="white" stroke-width="2"/></svg>
+      </div>
+      <div><strong>AquaSmart</strong><span>Farm Manager</span></div>
+    </div>
+
+    <nav class="nav" aria-label="Điều hướng chính">
+      <button class="nav-item active" data-page="overview">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>
+        <span>Tổng quan</span>
+      </button>
+      <button class="nav-item" data-page="ponds">
+        <svg viewBox="0 0 24 24"><path d="M3 17c3-2 6-2 9 0s6 2 9 0M3 21c3-2 6-2 9 0s6 2 9 0M5 9c0-3 3-5 7-5s7 2 7 5-3 5-7 5-7-2-7-5Z"/></svg>
+        <span>Quản lý ao</span>
+      </button>
+      <button class="nav-item" data-page="monitor">
+        <svg viewBox="0 0 24 24"><path d="M4 17V8m5 9V5m5 12v-6m5 6V3"/><path d="M3 21h18"/></svg>
+        <span>Giám sát môi trường</span>
+      </button>
+      <button class="nav-item" data-page="log">
+        <svg viewBox="0 0 24 24"><path d="M7 3h10l2 2v16H5V5l2-2Z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        <span>Nhật ký nuôi</span>
+      </button>
+      <button class="nav-item" data-page="equipment">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a8 8 0 0 0 .1-6l2-1.5-2-3.4-2.5 1A8 8 0 0 0 12 3l-.5-2h-4L7 3a8 8 0 0 0-4 2l-2-1-2 3.5 2 1.5a8 8 0 0 0 0 6l-2 1.5 2 3.4 2.5-1A8 8 0 0 0 8 21l.5 2h4l.5-2a8 8 0 0 0 4-2l2.5 1 2-3.4-2.1-1.6Z"/></svg>
+        <span>Thiết bị</span>
+      </button>
+      <button class="nav-item" data-page="market">
+        <svg viewBox="0 0 24 24"><path d="M3 12c4-5 10-6 17-2l2 2-2 2c-7 4-13 3-17-2Z"/><circle cx="8" cy="12" r="1"/><path d="m3 12-2-3v6l2-3Z"/></svg>
+        <span>Giá tôm cá </span>
+      </button>
+      <button class="nav-item" data-page="reports">
+        <svg viewBox="0 0 24 24"><path d="M4 20V10m5 10V4m6 16v-7m5 7V7"/><path d="M3 20h18"/></svg>
+        <span>Báo cáo</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="nav-item" data-page="settings">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M4.9 4.9 7 7m10 10 2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg>
+        <span>Cài đặt</span>
+      </button>
+      <button class="nav-item" data-page="help">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.1 2.4c-.6.2-.6 1.6-.6 1.6M12 17h.01"/></svg>
+        <span>Trợ giúp</span>
+      </button>
+      <div class="profile">
+        <div class="avatar">TN</div>
+        <div class="profile-copy"><strong>Admin</strong><span>admin</span></div>
+        <button class="dots" aria-label="Tùy chọn tài khoản">•••</button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="menu-button" id="menuButton" aria-label="Mở menu">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <div class="search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg>
+        <input type="search" placeholder="Tìm kiếm ao, thiết bị..." aria-label="Tìm kiếm">
+        <kbd>⌘ K</kbd>
+      </div>
+      <div class="top-actions">
+        <button class="weather" aria-label="Thời tiết">
+          <svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="4"/><path d="M9 14h8a4 4 0 1 0-1-7.9A5 5 0 0 0 6.5 8 3 3 0 0 0 9 14Z"/></svg>
+          <span><strong>28°C</strong><small>Thái Nguyên</small></span>
+        </button>
+        <button class="icon-button notification" aria-label="Thông báo">
+          <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
+          <span class="badge">3</span>
+        </button>
+        <div class="top-avatar">TN</div>
+      </div>
+    </header>
+
+    <section class="content">
+      <div id="overviewPage">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">TỔNG QUAN</p>
+          <h1>Xin chào, <b id="welcomeName">Đạt</b> <span>👋</span></h1>
+          <p class="subtitle">Hôm nay, 18 tháng 11 năm 2026</p>
+        </div>
+        <button class="primary-button" id="addPondButton">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          Thêm ao nuôi
+        </button>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-icon cyan"><svg viewBox="0 0 24 24"><path d="M3 17c3-2 6-2 9 0s6 2 9 0M3 21c3-2 6-2 9 0s6 2 9 0M5 9c0-3 3-5 7-5s7 2 7 5-3 5-7 5-7-2-7-5Z"/></svg></div>
+          <div class="stat-label">Tổng ao nuôi</div>
+          <div class="stat-value"><span id="overviewPondCount">0</span></div>
+          <div class="stat-caption"><b id="overviewActivePonds">0</b> đang hoạt động</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon blue"><svg viewBox="0 0 24 24"><path d="M12 2v20M5 5c4 3 10 3 14 0M5 12c4 3 10 3 14 0M5 19c4 3 10 3 14 0"/></svg></div>
+          <div class="stat-label">Nhiệt độ trung bình</div>
+          <div class="stat-value"><span id="overviewTemperature">—</span> <small>°C</small></div>
+          <div class="stat-caption">Trong ngưỡng <b>tối ưu</b></div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon purple"><svg viewBox="0 0 24 24"><path d="M12 3C8 8 5 12 5 16a7 7 0 0 0 14 0c0-4-3-8-7-13Z"/><path d="M9 17c1.5 1.5 4.5 1.5 6 0"/></svg></div>
+          <div class="stat-label">Nồng độ oxy (DO)</div>
+          <div class="stat-value"><span id="overviewOxygen">—</span> <small>mg/L</small></div>
+          <div class="stat-caption"><span class="status-dot green"></span>Đạt tiêu chuẩn</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon amber"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></div>
+          <div class="stat-label">Cảnh báo cần xử lý</div>
+          <div class="stat-value"><span id="overviewAlertCount">0</span></div>
+          <div class="stat-caption"><b id="overviewCriticalCount">0</b> mức quan trọng</div>
+        </article>
+      </div>
+
+      <div class="dashboard-grid">
+        <section class="panel chart-panel">
+          <div class="panel-header">
+            <div><h2>Chỉ số môi trường</h2><p>Dữ liệu trung bình các ao nuôi</p></div>
+            <div class="chart-tools">
+              <div class="legend"><span class="legend-dot temperature"></span>Nhiệt độ</div>
+              <div class="legend"><span class="legend-dot oxygen"></span>DO</div>
+              <button class="period-button">7 ngày <svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg></button>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="environmentChart"></canvas>
+          </div>
+        </section>
+
+        <section class="panel health-panel">
+          <div class="panel-header">
+            <div><h2>Tình trạng ao nuôi</h2><p>Cập nhật 5 phút trước</p></div>
+            <button class="more-button">•••</button>
+          </div>
+          <div class="health-ring">
+            <div class="ring" id="overviewHealthRing" style="--value: 0">
+              <div><strong id="overviewHealthPercent">0%</strong><span>Đạt chuẩn</span></div>
+            </div>
+          </div>
+          <div class="health-list">
+            <div><span><i class="status-dot green"></i>Tốt</span><strong id="overviewGoodPonds">0 ao</strong></div>
+            <div><span><i class="status-dot amber"></i>Cần theo dõi</span><strong id="overviewWarningPonds">0 ao</strong></div>
+            <div><span><i class="status-dot red"></i>Nguy cấp</span><strong id="overviewDangerPonds">0 ao</strong></div>
+          </div>
+        </section>
+
+        <section class="panel pond-panel">
+          <div class="panel-header">
+            <div><h2>Danh sách ao nuôi</h2><p id="overviewPondListCount">0 ao đang được quản lý</p></div>
+            <button class="text-button">Xem tất cả <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>
+          </div>
+          <div class="pond-table">
+            <div class="table-head"><span>AO NUÔI</span><span>NHIỆT ĐỘ</span><span>pH</span><span>DO</span><span>TRẠNG THÁI</span><span></span></div>
+            <div id="pondRows"></div>
+          </div>
+        </section>
+
+        <section class="panel alert-panel">
+          <div class="panel-header">
+            <div><h2>Cảnh báo mới</h2><p>3 cảnh báo trong hôm nay</p></div>
+            <button class="text-button">Xem tất cả</button>
+          </div>
+          <div class="alert-list">
+            <article class="alert-item critical">
+              <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3ZM12 9v5m0 3h.01"/></svg></div>
+              <div><div class="alert-title"><strong>DO thấp bất thường</strong><span>Quan trọng</span></div><p>Ao Tôm 03 • 4.8 mg/L</p><small>10 phút trước</small></div>
+            </article>
+            <article class="alert-item">
+              <div class="alert-icon warning-icon"><svg viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3ZM12 9v5m0 3h.01"/></svg></div>
+              <div><div class="alert-title"><strong>pH vượt ngưỡng</strong><span>Cần theo dõi</span></div><p>Ao Cá 02 • pH 8.5</p><small>42 phút trước</small></div>
+            </article>
+            <article class="alert-item">
+              <div class="alert-icon info-icon"><svg viewBox="0 0 24 24"><path d="M12 8v.01M12 12v5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg></div>
+              <div><div class="alert-title"><strong>Thiết bị mất kết nối</strong><span>Thông tin</span></div><p>Cảm biến SEN-008 • 2 giờ</p><small>1 giờ trước</small></div>
+            </article>
+          </div>
+        </section>
+      </div>
+      </div>
+      <div id="subPage" class="sub-page" hidden></div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="pondModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header"><div><p class="eyebrow">KHAI BÁO</p><h2 id="modalTitle">Thêm ao nuôi mới</h2></div><button class="modal-close" id="modalClose" aria-label="Đóng">×</button></div>
+      <form id="pondForm">
+        <label>Tên ao<input name="name" required placeholder="Ví dụ: Ao Cá 06"></label>
+        <div class="form-grid">
+          <label>Diện tích (m²)<input name="area" type="number" min="1" required placeholder="1500"></label>
+          <label>Loài nuôi<select name="species"><option>Cá chép</option><option>Cá tra</option><option>Tôm sú</option><option>Tôm thẻ</option></select></label>
+        </div>
+        <div class="metric-form-grid">
+          <label>Nhiệt độ (°C)<input name="temperature" type="number" min="0.1" step="0.1" required></label>
+          <label>pH<input name="ph" type="number" min="0.1" max="14" step="0.1" required></label>
+          <label>DO (mg/L)<input name="do" type="number" min="0.1" step="0.1" required></label>
+        </div>
+        <label>Ghi chú<textarea name="note" placeholder="Thông tin bổ sung về ao nuôi"></textarea></label>
+        <div class="modal-actions"><button type="button" class="secondary-button" id="cancelModal">Hủy</button><button type="submit" class="primary-button">Lưu ao nuôi</button></div>
+      </form>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="auth.js?v=20261123-8"></script>
+  <script src="app.js?v=20261123-8"></script>
+</body>
+</html>

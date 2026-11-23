@@ -1,0 +1,8 @@
+.venv/
+.vscode/
+node_modules/
+__pycache__/
+*.py[cod]
+*.csv
+*.log
+.DS_Store

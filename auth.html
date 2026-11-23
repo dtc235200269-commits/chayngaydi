@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập - AquaSmart</title>
+  <link rel="stylesheet" href="styles.css?v=20261123-3">
+</head>
+<body class="auth-page" data-auth-page="true">
+  <main class="auth-shell">
+    <section class="auth-card" aria-labelledby="authTitle">
+      <a class="auth-brand" href="auth.html" aria-label="AquaSmart">
+        <span class="auth-brand-mark">AS</span>
+        <span><strong>AquaSmart</strong><small>Farm Manager</small></span>
+      </a>
+      <p class="eyebrow">AQUASMART FARM MANAGER</p>
+      <h1 id="authTitle">Đăng nhập</h1>
+      <p class="auth-intro">Chào mừng bạn quay lại. Đăng nhập để tiếp tục.</p>
+      <form id="loginForm" class="auth-form" novalidate>
+        <label class="form-field auth-field">Email
+          <span class="auth-input-wrap">
+            <svg class="auth-field-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+            <input name="email" type="email" autocomplete="email" required placeholder="Nhập email của bạn">
+          </span>
+        </label>
+        <label class="form-field auth-field">Mật khẩu
+          <span class="auth-input-wrap">
+            <svg class="auth-field-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+            <input name="password" type="password" autocomplete="current-password" required placeholder="Nhập mật khẩu">
+            <button type="button" class="auth-password-toggle" data-password-toggle aria-label="Hiện mật khẩu">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="3"/><path class="eye-slash" d="m3 3 18 18"/></svg>
+            </button>
+          </span>
+        </label>
+        <label class="auth-remember"><input id="rememberMe" type="checkbox" checked><span>Ghi nhớ đăng nhập</span></label>
+        <button class="primary-button auth-submit" type="submit">Đăng nhập</button>
+      </form>
+      <p class="auth-switch" id="loginSwitch">Chưa có tài khoản? <button type="button" id="registerTab">Đăng ký</button></p>
+      <form id="registerForm" class="auth-form" hidden novalidate>
+        <label class="form-field auth-field">Họ và tên
+          <span class="auth-input-wrap">
+            <svg class="auth-field-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+            <input name="name" autocomplete="name" required placeholder="Tên hiển thị (có thể nhập tự do)">
+          </span>
+        </label>
+        <label class="form-field auth-field">Email
+          <span class="auth-input-wrap">
+            <svg class="auth-field-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+            <input name="email" type="email" autocomplete="email" required placeholder="ten@email.com">
+          </span>
+        </label>
+        <label class="form-field auth-field">Mật khẩu
+          <span class="auth-input-wrap">
+            <svg class="auth-field-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+            <input name="password" type="password" autocomplete="new-password" minlength="8" required placeholder="Ít nhất 8 ký tự">
+            <button type="button" class="auth-password-toggle" data-password-toggle aria-label="Hiện mật khẩu">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="3"/><path class="eye-slash" d="m3 3 18 18"/></svg>
+            </button>
+          </span>
+        </label>
+        <label class="form-field auth-field">Nhập lại mật khẩu
+          <span class="auth-input-wrap">
+            <svg class="auth-field-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+            <input name="confirmPassword" type="password" autocomplete="new-password" minlength="8" required placeholder="Nhập lại mật khẩu">
+            <button type="button" class="auth-password-toggle" data-password-toggle aria-label="Hiện mật khẩu">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="3"/><path class="eye-slash" d="m3 3 18 18"/></svg>
+            </button>
+          </span>
+        </label>
+        <button class="primary-button auth-submit" type="submit">Tạo tài khoản</button>
+      </form>
+      <p class="auth-switch" id="registerSwitch" hidden>Đã có tài khoản? <button type="button" id="loginTab">Đăng nhập</button></p>
+      <p id="authMessage" class="auth-message" role="status" aria-live="polite"></p>
+      <p class="auth-disclaimer">Tài khoản được xác thực và dữ liệu được lưu qua Supabase theo từng tài khoản AquaSmart.</p>
+      <p class="auth-credit">AquaSmart <strong>• Quản lý nuôi trồng thủy sản</strong></p>
+    </section>
+  </main>
+  <script src="auth.js?v=20261123-8"></script>
+</body>
+</html>
