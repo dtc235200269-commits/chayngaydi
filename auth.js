@@ -170,7 +170,7 @@
     const updates = { data: { name: normalizedName } };
     if (emailConfirmationRequired) updates.email = normalizedEmail;
     const { data, error } = await supabaseClient.auth.updateUser(updates);
-        if (error) throw new Error(error.message);
+    if (error) throw new Error(error.message);
     currentUser = mapUser(data.user);
     syncProfiles(currentUser);
     return { user: currentUser, emailConfirmationRequired };
