@@ -254,6 +254,9 @@
       showMessage("Mật khẩu nhập lại không khớp.");
       return;
     }
+    const submitButton = registerForm.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    submitButton.textContent = "Đang tạo tài khoản...";
     try {
       if (!await window.aquaAuthReady || !supabaseClient) return;
       setRememberPreference();
@@ -265,14 +268,28 @@
           emailRedirectTo: new URL("auth.html", window.location.href).href
         }
       });
-      if (error) throw error;
-      if (!data.session) {
-        showMessage("Đăng ký thành công. Hãy xác nhận email để hoàn tất và đăng nhập.", false);
-        return;
+      if (error) {
+        if (error.code === "user_already_exists" || error.status === 422) {
+          throw new Error("Email này đã được đăng ký. Hãy đăng nhập.");
+        }
+        throw error;
       }
-      window.location.replace(new URL("index.html?v=20261123-3", window.location.href).href);
+      if (!data.session) {
+        const { error: loginError } = await supabaseClient.auth.signInWithPassword({ email, password });
+        if (loginError) {
+          showMessage("Tạo tài khoản thành công. Hãy đăng nhập bằng email và mật khẩu vừa tạo.", false);
+          selectForm(false);
+          loginForm.elements.email.value = email;
+          return;
+        }
+      }
+      showMessage("Tạo tài khoản thành công. Đang mở AquaSmart...", false);
+      window.location.replace(new URL("index.html?v=20261123-4", window.location.href).href);
     } catch (error) {
       showMessage(error.message || "Không thể tạo tài khoản.");
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = "Tạo tài khoản";
     }
   }
 
