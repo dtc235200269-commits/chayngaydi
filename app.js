@@ -11,9 +11,9 @@ const searchInput = document.querySelector(".search input");
 const toast = document.getElementById("toast");
 const overviewPage = document.getElementById("overviewPage");
 const subPage = document.getElementById("subPage");
-const isAdmin = () => window.aquaAuth?.isAdmin?.() === true;
-function enforceAdminAction(action) { if (isAdmin()) return true; showToast("Tài khoản chỉ có quyền xem. Chỉ Admin mới được chỉnh dữ liệu.", true); return false; }
-function applyViewerMode() { if (isAdmin()) return; document.querySelectorAll("#addPondButton, .pond-action, .delete-market-item, .save-market-price, #pondModal").forEach((element) => element.style.display = "none"); document.querySelectorAll("#pondForm, #marketItemForm, #inspectionForm, #journalEntryForm, #reportForm").forEach((form) => form.querySelectorAll("input, textarea, select, button").forEach((control) => control.disabled = true)); if (!document.querySelector(".viewer-mode-banner")) { const banner = document.createElement("div"); banner.className = "viewer-mode-banner utility-card"; banner.textContent = "Chế độ xem: tài khoản này không thể thêm, sửa hoặc xóa dữ liệu."; (document.querySelector(".content") || document.body).prepend(banner); } }
+function enforceAdminAction() {
+  return true;
+}
 
 function storageKey(key) {
   const account = window.aquaAuth?.getCurrentUser();
@@ -164,6 +164,7 @@ function loadPondPowerStates() {
 function savePonds() {
   if (!enforceAdminAction("edit ponds")) return false;
   writeAppData("aquasmart-ponds", ponds);
+  return true;
 }
 
 function savePondPowerStates() {
@@ -1297,5 +1298,4 @@ if (currentPage && currentPage !== "overview") {
   drawChart();
   window.addEventListener("resize", drawChart);
 }
-applyViewerMode();
 })();
